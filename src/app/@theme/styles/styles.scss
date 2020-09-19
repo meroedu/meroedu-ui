@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
+
+@import "~bootstrap/scss/bootstrap.scss";
+
+// ======= Nebular Theme - to customize theme, use themes.scss ===========
+@import "~@nebular/theme/styles/prebuilt/default.css";
+
+/*
+//@import 'theme/themes';
+
+@import '~@nebular/theme/styles/globals';
+
+// install the framework and custom global styles
+@include nb-install() {
+
+  // framework global styles
+  @include nb-theme-global();
+};
+*/
+
+// ===================================================
+
+@import "custom-pages";

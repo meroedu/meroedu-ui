@@ -1,0 +1,66 @@
+<div class="row">
+
+  <div class="col-8">
+    <nb-card>
+      <nb-card-body>
+        <span class="h5">{{course.title}}</span>
+        <div class="mt-3">
+          <img class="picture w-100" [src]="course.image"/>
+        </div>
+
+        <div class="row mt-4">
+          <div class="col-12">
+            <nb-tabset>
+
+              <nb-tab tabTitle="Overview">
+                <div class="">
+                  <span class="h6">About Course:</span>
+                  <p>{{course.description}}</p>
+                </div>
+                <div class="">
+                  <span class="h6">You will Learn:</span>
+                  <p>Understanding HTML ...</p>
+                </div>
+              </nb-tab>
+
+              <nb-tab tabTitle="FAQ">
+                <span>Content FAQ...</span>
+              </nb-tab>
+
+              <nb-tab tabTitle="Announcement">
+                <span>Content announcement...</span>
+              </nb-tab>
+
+              <nb-tab tabTitle="Reviews">
+                <span>Content reviews...</span>
+              </nb-tab>
+
+            </nb-tabset>
+          </div>
+        </div>
+
+      </nb-card-body>
+
+    </nb-card>
+  </div>
+
+  <div class="col-4">
+    <div class="infinite-cards row">
+      <nb-card class="own-scroll">
+        <nb-card-header>Course Content</nb-card-header>
+        <nb-list>
+          <nb-list-item *ngFor="let lessons of course.subCourse; let i = index">
+            <article>
+              <div class="h5"><span class="pr-1">Lesson:{{i+1}}</span>{{lessons.title}}</div>
+              <p>{{lessons.description}}</p>
+              <span class="mt-2">
+                <nb-icon icon="clock" status="info" pack="eva"></nb-icon>
+                <span class="pl-2">{{lessons.duration}} Minutes</span>
+              </span>
+            </article>
+          </nb-list-item>
+        </nb-list>
+      </nb-card>
+    </div>
+
+  </div>

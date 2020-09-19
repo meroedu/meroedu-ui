@@ -1,0 +1,43 @@
+<div class="col-12">
+  <span class="h4">Courses</span>
+</div>
+
+<div class="col-12 mt-3">
+  <div class="d-flex w-100 justify-content-start">
+    <div>
+      <app-search-course></app-search-course>
+    </div>
+    <span class="flex-grow-1"></span>
+    <div>
+      <button nbButton size="medium" status="info">
+        <nb-icon icon="plus-circle-outline"></nb-icon>
+        Create Course
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="col-12 mt-4">
+  <div class="d-flex w-100 justify-content-start">
+    <div class="flex-grow-1"><span>All | Assigned | Published | Archieved</span></div>
+    <div>
+      <button class="ml-1" nbButton size="small" (click)="currentView = VIEW.TABLE">
+        <nb-icon icon="credit-card" pack="eva"></nb-icon>
+      </button>
+      <button class="ml-1" nbButton size="small" (click)="currentView = VIEW.LIST">
+        <nb-icon icon="list" pack="eva"></nb-icon>
+      </button>
+      <button class="ml-1" nbButton size="small" status="info" (click)="currentView = VIEW.GRID">
+        <nb-icon icon="grid" pack="eva"></nb-icon>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="row mt-1">
+  <ng-container *ngFor="let course of courses">
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+      <app-course-card-item [course]="course"></app-course-card-item>
+    </div>
+  </ng-container>
+</div>

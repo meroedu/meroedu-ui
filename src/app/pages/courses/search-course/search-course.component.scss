@@ -1,0 +1,7 @@
+@import 'src/app/@theme/styles/theme/themes';
+
+@include nb-install-component() {
+  .search-box {
+    background-color: #fff;
+  }
+}
