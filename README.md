@@ -1,20 +1,20 @@
 
 ###  Meroedu-UI based on Angular 10+
 
-| <a target="_blank" href="#">![MeroEdu-UI](./src/assets/meroeduUI.png)</a> |
+| <a target="_blank" href="https://tender-perlman-341aa0.netlify.app">![MeroEdu-UI](./src/assets/meroeduUI.png)</a> |
 | --- |
 |  MeroEdu |
 
 ### Demo
 
-<a target="_blank" href="http://#">Live Demo</a>
+<a target="_blank" href="https://tender-perlman-341aa0.netlify.app">Live Demo</a>
 
 ## Documentation
 #### Overview:  
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.8.
-- Uses [Ngx-admin](https://github.com/akveo/ngx-admin) modules set,
+- Uses [Nebular](https://akveo.github.io/nebular/docs) modules set,
 
-##### included:
+##### Included:
 
 - Angular 10+ & Typescript
 - Bootstrap 4+ & SCSS
