@@ -7,13 +7,22 @@ import {CourseTableItemComponent} from './course-items/course-table-item/course-
 import {ThemeModule} from '../../@theme/theme.module';
 import {CoursesRoutingModule} from './courses-routing.module';
 import {SearchCourseComponent} from './search-course/search-course.component';
-import { CourseDetailComponent } from './course-detail/course-detail.component';
+import {CourseDetailComponent} from './course-detail/course-detail.component';
+import {CreateCourseComponent} from './course-builder/create-course/create-course.component';
+import {CourseBuilderComponent} from './course-builder/course-builder.component';
+import {BuildLessonsComponent} from './course-builder/build-lessons/build-lessons.component';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
     CoursesRoutingModule,
     ThemeModule,
+    FormsModule,
+    ReactiveFormsModule,
+    DragDropModule,
+    DragDropModule,
   ],
   declarations: [
     CourseViewComponent,
@@ -21,7 +30,10 @@ import { CourseDetailComponent } from './course-detail/course-detail.component';
     CourseListItemComponent,
     CourseTableItemComponent,
     SearchCourseComponent,
-    CourseDetailComponent
+    CourseDetailComponent,
+    CreateCourseComponent,
+    CourseBuilderComponent,
+    BuildLessonsComponent
   ]
 })
 export class CourseModule {

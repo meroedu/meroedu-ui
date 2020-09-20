@@ -1,0 +1,44 @@
+<nb-card>
+  <nb-card-header>Create Course</nb-card-header>
+  <nb-card-body>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="inputCourseName" class="label">Course Name</label>
+          <input type="text" nbInput fullWidth id="inputCourseName" placeholder="Enter a Course Name">
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="inputDescription" class="label">Description</label>
+          <textarea nbInput fullWidth id="inputDescription"
+                    placeholder="Tell something about this course"></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="inputTags" class="label">Tags</label>
+          <nb-select fullWidth id="inputTags" placeholder="Select Tags">
+            <nb-option value="1">Option 1</nb-option>
+            <nb-option value="2">Option 2</nb-option>
+          </nb-select>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="inputCategories" class="label">Category</label>
+          <nb-select fullWidth id="inputCategories" placeholder="Select Category">
+            <nb-option value="1">Option 1</nb-option>
+            <nb-option value="2">Option 2</nb-option>
+          </nb-select>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex w-100">
+      <span class="flex-grow-1"></span>
+      <button type="submit" nbButton status="info">Create</button>
+    </div>
+  </nb-card-body>
+</nb-card>

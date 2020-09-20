@@ -1,9 +1,12 @@
-import {NgModule} from '@angular/core';
+import {ModuleWithProviders, NgModule} from '@angular/core';
 import {
+  CORPORATE_THEME,
+  COSMIC_THEME, DARK_THEME,
+  DEFAULT_THEME,
   NbActionsModule,
   NbButtonModule,
   NbCardModule,
-  NbContextMenuModule,
+  NbContextMenuModule, NbDialogModule,
   NbFormFieldModule,
   NbIconModule,
   NbInputModule,
@@ -13,7 +16,7 @@ import {
   NbRadioModule,
   NbSelectModule,
   NbSidebarModule,
-  NbTabsetModule,
+  NbTabsetModule, NbThemeModule,
   NbUserModule
 } from '@nebular/theme';
 import {NbEvaIconsModule} from '@nebular/eva-icons';
@@ -26,7 +29,7 @@ const NB_MODULES = [
   NbLayoutModule, NbListModule, NbActionsModule, NbSidebarModule, NbMenuModule,
   // Nb Components
   NbButtonModule, NbCardModule, NbContextMenuModule, NbTabsetModule, NbListModule,
-  NbTabsetModule,
+  NbTabsetModule, NbDialogModule,
   // Forms
   NbFormFieldModule, NbInputModule, NbRadioModule, NbSelectModule,
   // Icons
@@ -54,4 +57,17 @@ const CUSTOM_COMPONENTS = [
   ]
 })
 export class ThemeModule {
+  static forRoot(): ModuleWithProviders<ThemeModule> {
+    return {
+      ngModule: ThemeModule,
+      providers: [
+        ...NbThemeModule.forRoot(
+          {
+            name: 'default',
+          },
+          [ DEFAULT_THEME, COSMIC_THEME, CORPORATE_THEME, DARK_THEME ],
+        ).providers,
+      ],
+    };
+  }
 }

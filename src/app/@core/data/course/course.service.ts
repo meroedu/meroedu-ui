@@ -20,21 +20,25 @@ export class CourseService {
       duration: 45,
       subCourse: [
         {
+          id: '1',
           title: 'Introduction to HTML',
           description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever.',
           duration: 30
         },
         {
+          id: '2',
           title: 'Introduction to HTML',
           description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever.',
           duration: 30
         },
         {
+          id: '3',
           title: 'Introduction to HTML',
           description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever.',
           duration: 30
         },
         {
+          id: '4',
           title: 'Introduction to HTML',
           description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever.',
           duration: 30
@@ -53,21 +57,25 @@ export class CourseService {
       duration: 16,
       subCourse: [
         {
+          id: '1',
           title: 'Introduction to HTML',
           description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever.',
           duration: 30
         },
         {
+          id: '2',
           title: 'Introduction to HTML',
           description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever.',
           duration: 30
         },
         {
+          id: '3',
           title: 'Introduction to HTML',
           description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever.',
           duration: 30
         },
         {
+          id: '4',
           title: 'Introduction to HTML',
           description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever.',
           duration: 30

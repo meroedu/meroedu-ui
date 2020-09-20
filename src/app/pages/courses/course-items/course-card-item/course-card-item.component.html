@@ -1,5 +1,5 @@
 <nb-card size="medium">
-  <nb-card-body class="p-0">
+  <nb-card-body class="overflow-hidden p-0">
     <div>
       <img class="picture w-100" [src]="course.image"/>
     </div>
@@ -7,7 +7,7 @@
   </nb-card-body>
 
   <nb-card-footer>
-    <div class="details">
+    <div class="details pt-1">
       <span class="h6" [routerLink]="API_ROUTES.COURSE_DETAILS + '/' + course.id">
         <span class="course-title-link">{{course.title}}</span>
       </span>
@@ -18,19 +18,23 @@
     </div>
 
     <div class="row mt-3">
-      <div class="col-auto">
-        <div class="details subtitle-2 text-left"><span></span>{{course.type}}</div>
-        <i class="nb-square"></i>
+      <div class="details subtitle-2 text-left">
+        <nb-icon icon="pricetags" pack="eva" status="basic"></nb-icon>
+        <span class="pl-1">{{course.type}}</span>
       </div>
 
       <div class="col">
-        <div class="details subtitle-2 text-center"><span></span>{{course.duration}} Hours</div>
-        <i class="nb-square"></i>
+        <div class="details subtitle-2 text-center">
+          <nb-icon icon="clock" pack="eva" status="basic"></nb-icon>
+          <span class="pl-1">{{course.duration}} Hours</span>
+        </div>
       </div>
 
       <div class="col-auto">
-        <div class="details subtitle-2 text-right"><span></span> {{course.subCourse.length}} Lessons</div>
-        <i class="nb-square"></i>
+        <div class="details subtitle-2 text-right">
+          <nb-icon icon="book" pack="eva" status="basic"></nb-icon>
+          <span class="pl-1">{{course.subCourse?.length}} Lessons</span>
+        </div>
       </div>
 
     </div>

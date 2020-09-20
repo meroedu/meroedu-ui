@@ -1,18 +1,19 @@
 export interface Course {
-  id: string;
+  id?: string;
   title: string;
   type: string;
   author: string;
   image: string;
   duration: number;
   description: string;
-  subCourse?: CourseLessons[];
+  subCourse?: CourseLesson[];
 }
 
-export interface CourseLessons {
+export interface CourseLesson {
+  id?: string;
   title: string;
   description: string;
-  duration: number;
+  duration?: number;
 }
 
 export type CourseFilterItem = 'All' | 'Assigned' | 'Published' | 'Archived' | 'Draft';

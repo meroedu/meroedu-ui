@@ -1,1 +1,41 @@
-<p>course-list-item works!</p>
+<nb-card>
+  <nb-card-body>
+
+    <div class="row">
+      <div class="col-sm-12 col-md-4 col-lg-3">
+        <img class="picture w-100" [src]="course.image"/>
+      </div>
+      <div class="col-sm-8 col-md-6 col-lg-6">
+
+        <div class="details pt-1">
+          <span class="h6" [routerLink]="API_ROUTES.COURSE_DETAILS + '/' + course.id">
+            <span class="course-title-link">{{course.title}}</span>
+          </span>
+
+          <div class="description">
+            {{course.description}}
+          </div>
+        </div>
+
+      </div>
+      <div class="col-sm-4 col-md-2 col-lg-3">
+        <div class="d-flex h-100 flex-column justify-content-around">
+          <div class="details subtitle-2 text-left">
+            <nb-icon icon="pricetags" pack="eva" status="basic"></nb-icon>
+            <span class="pl-1">{{course.type}}</span>
+          </div>
+          <div class="details subtitle-2 text-left">
+            <nb-icon icon="clock" pack="eva" status="basic"></nb-icon>
+            <span class="pl-1">{{course.duration}} Hours</span>
+          </div>
+          <div class="details subtitle-2 text-left">
+            <nb-icon icon="book" pack="eva" status="basic"></nb-icon>
+            <span class="pl-1">{{course.subCourse?.length}} Lessons</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </nb-card-body>
+
+</nb-card>

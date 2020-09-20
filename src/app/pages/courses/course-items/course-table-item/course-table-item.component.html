@@ -1,1 +1,34 @@
-<p>course-table-item works!</p>
+<nb-card>
+  <nb-card-body>
+
+    <div class="table-responsive">
+      <table class="table table-striped table-hover">
+        <thead class="bg-primary text-white">
+        <tr>
+          <td>#</td>
+          <td>Title</td>
+          <td>Type</td>
+          <td>Author</td>
+          <td>Duration</td>
+        </tr>
+        </thead>
+        <tbody *ngIf="coursesList">
+
+        <tr *ngFor="let course of coursesList; let i = index">
+          <td>{{i + 1}}</td>
+          <td>
+            <span [routerLink]="API_ROUTES.COURSE_DETAILS + '/' + course.id">
+            <span class="course-title-link">{{course.title}}</span>
+          </span>
+          </td>
+          <td>{{course.type}}</td>
+          <td>{{course.author}}</td>
+          <td>{{course.duration}} Hours</td>
+        </tr>
+        </tbody>
+
+      </table>
+
+    </div>
+  </nb-card-body>
+</nb-card>

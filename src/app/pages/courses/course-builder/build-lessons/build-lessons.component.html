@@ -1,0 +1,84 @@
+<div class="row">
+  <div class="col-6">
+
+    <nb-card>
+      <nb-card-header class="d-flex">
+        <span class="d-flex align-items-center">Build Lessons</span>
+        <span class="flex-grow-1"></span>
+        <button nbButton size="small" status="success" class="mt-2" (click)="addNew()">
+          Add New
+          <nb-icon icon="plus" pack="eva"></nb-icon>
+        </button>
+      </nb-card-header>
+
+      <nb-card-body>
+        <div cdkDropList (cdkDropListDropped)="drop($event)">
+          <nb-list-item *ngFor="let lesson of courseLessons, index as i" cdkDrag>
+            <div class="draggable-item d-flex w-100" cdkDragHandle>
+              <button nbButton ghost size="giant">
+                <nb-icon icon="move" pack="eva"></nb-icon>
+              </button>
+              <div class="d-flex flex-grow-1 align-items-center">
+                <span class="pr-1">Lesson: {{i + 1}} - </span>
+                {{lesson.title}}
+              </div>
+              <button nbButton ghost size="medium" (click)="onEdit(lesson)" cdkDragHandle>
+                <nb-icon icon="edit-2" pack="eva" status="primary"></nb-icon>
+              </button>
+              <button nbButton ghost size="medium" (click)="confirmDelete(confirmDeleteDialog)" cdkDragHandle>
+                <nb-icon icon="trash" pack="eva" status="danger"></nb-icon>
+              </button>
+
+              <ng-template #confirmDeleteDialog let-data let-ref="dialogRef">
+                <nb-card>
+                  <nb-card-header>Are you sure you want to delete this lesson?</nb-card-header>
+                  <nb-card-body>
+                    {{ lesson.title }}
+                  </nb-card-body>
+                  <nb-card-footer class="d-flex w-100 justify-content-end">
+                    <button class="ml-1" nbButton size="small" status="danger" (click)="ref.close()">Cancel</button>
+                    <button class="ml-1" nbButton size="small" status="info" (click)="delete(ref, i)">Yes</button>
+                  </nb-card-footer>
+                </nb-card>
+              </ng-template>
+
+            </div>
+          </nb-list-item>
+        </div>
+      </nb-card-body>
+    </nb-card>
+
+  </div>
+
+  <!--  Lesson Edit  -->
+  <div class="col-6">
+
+    <nb-card>
+      <nb-card-header>Edit Lesson</nb-card-header>
+      <nb-card-body *ngIf="editLesson">
+        <form [formGroup]="lessonForm" (ngSubmit)="lessonSubmission()">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <label for="inputLessonTitle" class="label">Lesson Title</label>
+                <input type="text" nbInput fullWidth id="inputLessonTitle" formControlName="title">
+              </div>
+            </div>
+            <div class="col-sm-12">
+              <div class="form-group">
+                <label for="inputDescription" class="label">Description</label>
+                <textarea nbInput fullWidth id="inputDescription"formControlName="description"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex w-100">
+            <button type="submit" nbButton status="info">Confirm</button>
+          </div>
+        </form>
+      </nb-card-body>
+    </nb-card>
+
+  </div>
+
+</div>
+
