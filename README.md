@@ -1,13 +1,13 @@
 
 ###  Meroedu-UI based on Angular 10+
 
-| <a target="_blank" href="https://tender-perlman-341aa0.netlify.app">![MeroEdu-UI](./src/assets/meroeduUI.png)</a> |
+| <a target="_blank" href="https://elegant-jennings-4940c8.netlify.app">![MeroEdu-UI](./src/assets/meroeduUI.png)</a> |
 | --- |
 |  MeroEdu |
 
 ### Demo
 
-<a target="_blank" href="https://tender-perlman-341aa0.netlify.app">Live Demo</a>
+<a target="_blank" href="https://elegant-jennings-4940c8.netlify.app">Live Demo</a>
 
 ## Documentation
 #### Overview:  
