@@ -1,11 +1,62 @@
 import {Injectable} from '@angular/core';
-import {Course, CourseFilterItem} from './course';
+import {Course, CourseFilterItem, CourseLesson} from './course';
 import {Observable, of} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CourseService {
+
+  courseLessons: CourseLesson[] = [
+    {
+      id: '1',
+      title: 'Introduction',
+      content: [
+        {
+          id: '1',
+          title: 'Introduction to HTML',
+          description: 'Lorem Ipsum is standard dummy text ever.',
+          duration: 14
+        },
+        {
+          id: '2',
+          title: 'HTML Elements, and Attributes',
+          description: 'Lorem Ipsum is standard dummy text ever.',
+          duration: 14
+        }
+      ]
+    },
+    {
+      id: '2',
+      title: 'Styling and CSS',
+      content: [
+        {
+          id: '3',
+          title: 'Styling Elements, CSS, SCSS and all',
+          description: 'Lorem Ipsum is standard dummy text ever.',
+          duration: 20
+        }
+      ]
+    },
+    {
+      id: '3',
+      title: 'Graphics, Media and References',
+      content: [
+        {
+          id: '4',
+          title: 'Building Mock Design',
+          description: 'Lorem Ipsum is standard dummy text ever.',
+          duration: 22
+        },
+        {
+          id: '5',
+          title: 'Working with vector graphics',
+          description: 'Lorem Ipsum is standard dummy text ever.',
+          duration: 22
+        }
+      ]
+    },
+  ];
 
   courses: Course[] = [
     {
@@ -18,32 +69,7 @@ export class CourseService {
         'Lorem Lipson Graphic Design Work Lorem Lipson UInd\n' +
         'Lorem Lipson UI Lorem Lipson\n',
       duration: 45,
-      subCourse: [
-        {
-          id: '1',
-          title: 'Introduction to HTML',
-          description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever.',
-          duration: 30
-        },
-        {
-          id: '2',
-          title: 'Introduction to HTML',
-          description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever.',
-          duration: 30
-        },
-        {
-          id: '3',
-          title: 'Introduction to HTML',
-          description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever.',
-          duration: 30
-        },
-        {
-          id: '4',
-          title: 'Introduction to HTML',
-          description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever.',
-          duration: 30
-        }
-      ]
+      subCourse: this.courseLessons
     },
     {
       id: '2',
@@ -55,32 +81,7 @@ export class CourseService {
         'Lorem Lipson Graphic Design Work Lorem Lipson UInd\n' +
         'Lorem Lipson UI Lorem Lipson\n',
       duration: 16,
-      subCourse: [
-        {
-          id: '1',
-          title: 'Introduction to HTML',
-          description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever.',
-          duration: 30
-        },
-        {
-          id: '2',
-          title: 'Introduction to HTML',
-          description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever.',
-          duration: 30
-        },
-        {
-          id: '3',
-          title: 'Introduction to HTML',
-          description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever.',
-          duration: 30
-        },
-        {
-          id: '4',
-          title: 'Introduction to HTML',
-          description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever.',
-          duration: 30
-        }
-      ]
+      subCourse: this.courseLessons
     },
   ];
 

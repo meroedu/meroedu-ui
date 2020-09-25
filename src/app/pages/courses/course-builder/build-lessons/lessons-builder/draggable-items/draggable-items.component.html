@@ -1,0 +1,110 @@
+<nb-card>
+  <nb-card-header class="d-flex">
+    <span class="d-flex align-items-center">{{title}}</span>
+    <span class="flex-grow-1"></span>
+    <button nbButton size="small" status="success" class="mt-2" (click)="addNewItem()">
+      Add New
+      <nb-icon icon="plus" pack="eva"></nb-icon>
+    </button>
+  </nb-card-header>
+
+  <nb-card-body>
+    <div class="pb-2" cdkDropList [cdkDropListData]="items" (cdkDropListDropped)="drop($event)">
+      <div *ngFor="let item of items; let i = index" cdkDrag>
+        <div class="draggable-item d-flex w-100" cdkDragHandle>
+
+          <button nbButton ghost size="giant">
+            <nb-icon icon="move" pack="eva"></nb-icon>
+          </button>
+          <div class="d-flex flex-grow-1 align-items-center">
+            <span class="pr-1">{{i + 1}} - </span>
+            {{item[bindDisplayKey]}}
+          </div>
+          <ng-container *ngIf="enableChildAdd">
+            <button nbButton size="small" status="info" [outline]="true" class="mt-2" (click)="addNewChildItem(i)">
+              <nb-icon icon="plus" pack="eva"></nb-icon>
+            </button>
+          </ng-container>
+
+          <button nbButton ghost size="medium" (click)="editItem(item)">
+            <nb-icon icon="edit-2" pack="eva" status="primary"></nb-icon>
+          </button>
+          <button nbButton ghost size="medium" (click)="confirmDelete(confirmDeleteItemDialog)">
+            <nb-icon icon="trash" pack="eva" status="danger"></nb-icon>
+          </button>
+
+          <ng-template #confirmDeleteItemDialog let-data let-ref="dialogRef">
+            <nb-card>
+              <nb-card-header>Are you sure you want to delete this item?</nb-card-header>
+
+              <ng-template #defaultDeleteTemplate>
+                <span class="h6"> {{ item[bindDisplayKey] }} </span>
+              </ng-template>
+              <nb-card-body>
+                <ng-container *ngTemplateOutlet="deleteTemplate ? deleteTemplate: defaultDeleteTemplate"></ng-container>
+              </nb-card-body>
+
+              <nb-card-footer class="d-flex w-100 justify-content-end">
+                <button class="ml-1" nbButton size="small" status="danger" (click)="ref.close()">Cancel</button>
+                <button class="ml-1" nbButton size="small" status="info" (click)="deleteItem(ref, i)">Yes</button>
+              </nb-card-footer>
+            </nb-card>
+          </ng-template>
+
+        </div>
+
+        <div class="ml-5 pb-2" cdkDropList id="{{item[bindUniqueItemId]}}" [cdkDropListData]="item[bindChildDraggableKey]"
+             [cdkDropListConnectedTo]="connectedTo" (cdkDropListDropped)="drop($event)">
+          <div *ngFor="let subItem of item[bindChildDraggableKey]; let subIndex = index" cdkDrag>
+            <div class="draggable-item d-flex w-100" cdkDragHandle>
+
+              <button nbButton ghost size="giant">
+                <nb-icon icon="move" pack="eva"></nb-icon>
+              </button>
+              <div class="d-flex flex-grow-1 align-items-center">
+                <span class="pr-1">{{subIndex + 1}} - </span>
+                {{bindChildDisplayKey.length > 0 ? subItem[bindChildDisplayKey] : 'SubItem'}}
+              </div>
+
+              <button nbButton ghost size="medium" (click)="editSubItem(subItem, i)">
+                <nb-icon icon="edit-2" pack="eva" status="primary"></nb-icon>
+              </button>
+              <button nbButton ghost size="medium" (click)="confirmDelete(confirmDeleteSubItemDialog)">
+                <nb-icon icon="trash" pack="eva" status="danger"></nb-icon>
+              </button>
+
+              <ng-template #confirmDeleteSubItemDialog let-data let-ref="dialogRef">
+                <nb-card>
+                  <nb-card-header>Are you sure you want to delete this item?</nb-card-header>
+
+                  <ng-template #defaultDeleteTemplate>
+                <span class="h6">
+                  {{bindChildDisplayKey.length > 0 ? subItem[bindChildDisplayKey] : 'Parent - ' + (i + 1) + ' , ' + 'SubItem - ' + (subIndex + 1)}}
+                </span>
+                  </ng-template>
+                  <nb-card-body>
+                    <ng-container
+                      *ngTemplateOutlet="deleteTemplate ? deleteTemplate: defaultDeleteTemplate"></ng-container>
+                  </nb-card-body>
+
+                  <nb-card-footer class="d-flex w-100 justify-content-end">
+                    <button class="ml-1" nbButton size="small" status="danger" (click)="ref.close()">Cancel</button>
+                    <button class="ml-1" nbButton size="small" status="info"
+                            (click)="deleteChildItem(ref, i, subIndex)">
+                      Yes
+                    </button>
+                  </nb-card-footer>
+                </nb-card>
+              </ng-template>
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+  </nb-card-body>
+</nb-card>

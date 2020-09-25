@@ -1,0 +1,27 @@
+<nb-card>
+  <nb-card-header>Edit Lesson Content</nb-card-header>
+  <nb-card-body *ngIf="lessonContent">
+    <form [formGroup]="lessonForm" (ngSubmit)="onFormSubmission()" novalidate>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="inputLessonTitle" class="label">Content Title</label>
+            <input type="text" nbInput fullWidth id="inputLessonTitle" class="form-control"
+                   [status]="this.lessonForm.controls['title'].valid ? '' : 'danger'" formControlName="title"/>
+          </div>
+        </div>
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="inputContentDescription" class="label">Description</label>
+            <textarea nbInput fullWidth id="inputContentDescription" class="form-control"
+                      [status]="this.lessonForm.controls['description'].valid ? '' : 'danger'" formControlName="description"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex w-100">
+        <button type="submit" nbButton status="info">Confirm</button>
+      </div>
+    </form>
+  </nb-card-body>
+</nb-card>

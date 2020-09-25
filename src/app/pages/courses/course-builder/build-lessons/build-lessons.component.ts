@@ -1,8 +1,11 @@
-import {Component, OnInit, TemplateRef} from '@angular/core';
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import {Component, OnInit} from '@angular/core';
 import {NbDialogService} from '@nebular/theme';
-import {CourseLesson} from '../../../../@core/data/course/course';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {CourseContent, CourseLesson} from '../../../../@core/data/course/course';
+import {FormGroup} from '@angular/forms';
+import {CourseService} from '../../../../@core/data/course/course.service';
+import {EmitDraggableItem} from '../../../../@core/data/generic.model';
+import {DialogPromptComponent} from '../../../../@theme/components/dialog-prompt/dialog-prompt.component';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-build-lessons',
@@ -11,90 +14,141 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 export class BuildLessonsComponent implements OnInit {
 
-  lessonForm: FormGroup;
-  editLesson: CourseLesson;
+  editLessonId: string;
+  editCourseContent: CourseContent;
+  resetLessonForm: boolean;
+  courseLessons: CourseLesson[];
 
-  courseLessons: CourseLesson[] = [
-    {
-      id: '1',
-      title: 'Introduction to HTML',
-      description: 'Lorem Ipsum is standard dummy text ever.',
-      duration: 14
-    },
-    {
-      id: '2',
-      title: 'HTML Elements, Attributes and Styles',
-      description: 'Lorem Ipsum is standard dummy text ever.',
-      duration: 20
-    },
-    {
-      id: '3',
-      title: 'HTML Forms, Graphics, Media and References',
-      description: 'Lorem Ipsum is standard dummy text ever.',
-      duration: 22
-    },
-  ];
-
-  constructor(private dialogService: NbDialogService, private formBuilder: FormBuilder) {
+  constructor(private dialogService: NbDialogService, private courseService: CourseService) {
   }
 
   ngOnInit(): void {
-    this.initializeForm();
-  }
-
-  initializeForm(): void {
-    this.lessonForm = this.formBuilder.group({
-      id: [null],
-      title: ['', [Validators.required]],
-      description: ['', Validators.required]
+    this.courseService.getCourseById('1').subscribe(value => {
+      this.courseLessons = value.subCourse;
     });
   }
 
-  confirmDelete(dialog: TemplateRef<any>): void {
-    this.dialogService.open(dialog, {context: 'pass additional data to dialog', closeOnBackdropClick: true});
+  draggableItemOnEventTrigger(emitDraggableItem: EmitDraggableItem): void {
+    // console.log('emit event trigger ', emitDraggableItem);
+    if (emitDraggableItem.isEdit) {
+      if (!emitDraggableItem.isSubItem) {
+
+        if (emitDraggableItem.isNewItem) {
+          this.createLesson(emitDraggableItem);
+        } else {
+          this.updateLesson(emitDraggableItem);
+        }
+      } else if (emitDraggableItem.isSubItem) {
+        if (emitDraggableItem.isNewItem) {
+          this.createLessonContent(emitDraggableItem);
+        } else {
+          this.updateLessonContent(emitDraggableItem);
+        }
+      }
+    } else if (emitDraggableItem.isDelete) {
+      if (!emitDraggableItem.isSubItem) {
+        this.deleteLesson(emitDraggableItem);
+      } else {
+        this.deleteLessonContent(emitDraggableItem);
+      }
+    }
   }
 
-  delete(dialogRef: any, index: any): void {
+  draggableItemOnOrderChange(emitDraggableItem: EmitDraggableItem): void {
+    console.log('emit on order change ', emitDraggableItem);
+  }
+
+  openTitleEdit(currentValue): Observable<any> {
+    return this.dialogService.open(DialogPromptComponent, {
+      context: {
+        title: 'Enter Lesson Title',
+        value: currentValue
+      },
+    }).onClose;
+  }
+
+  createLesson(emitDraggableItem: EmitDraggableItem): void {
+    console.log('Adding new Lesson,');
+    // Call - Add New Lesson api here
+    this.openTitleEdit(emitDraggableItem.item.title).subscribe(dialogInputValue => {
+      // Call - Update Lesson api here
+      const courseLesson: CourseLesson = {
+        ...emitDraggableItem.item,
+        id: this.courseLessons.length + 1,
+        title: dialogInputValue
+      };
+      this.courseLessons.push(courseLesson);
+    });
+  }
+
+  updateLesson(emitDraggableItem: EmitDraggableItem): void {
+    console.log('Updating Lesson');
+    this.openTitleEdit(emitDraggableItem.item.title).subscribe(dialogInputValue => {
+      const index = this.courseLessons.findIndex(value => value.id === emitDraggableItem.itemId);
+      // Call - Update Lesson api here
+      this.courseLessons[index] = {...emitDraggableItem.item, title: dialogInputValue};
+    });
+  }
+
+  createLessonContent(emitDraggableItem: EmitDraggableItem): void {
+    // Call - Add New Lesson Content api here
+    console.log('adding new Lesson content');
+    const index = this.courseLessons.findIndex(value => value.id === emitDraggableItem.itemId);
+    const courseContent: CourseContent = {
+      ...emitDraggableItem.item,
+      id: emitDraggableItem.item.id ? emitDraggableItem.item.id : this.courseLessons[index].content.length + 1
+    };
+    this.editLessonId = emitDraggableItem.itemId;
+    this.editCourseContent = courseContent;
+    this.resetLessonForm = false;
+    this.courseLessons[index].content.push(courseContent);
+  }
+
+  updateLessonContent(emitDraggableItem: EmitDraggableItem): void {
+    // Call - Update Lesson Content api here
+    console.log('Updating Lesson Content ', emitDraggableItem.item);
+    this.editLessonId = emitDraggableItem.itemId;
+    this.editCourseContent = emitDraggableItem.item;
+    this.resetLessonForm = false;
+  }
+
+  deleteLesson(emitDraggableItem: EmitDraggableItem): void {
+    const index = this.courseLessons.findIndex(value => value.id === emitDraggableItem.itemId);
     this.courseLessons.splice(index, 1);
-    dialogRef.close();
   }
 
-  onEdit(currentLesson: CourseLesson): void {
-    this.editLesson = currentLesson;
-    this.lessonForm.patchValue(currentLesson);
+  deleteLessonContent(emitDraggableItem: EmitDraggableItem): void {
+    const index = this.courseLessons.findIndex(value => value.id === emitDraggableItem.itemId);
+    const subItemIndex = this.courseLessons[index].content.findIndex(value => value.id === emitDraggableItem.item.id);
+    this.courseLessons[index].content.splice(subItemIndex, 1);
   }
 
-  lessonSubmission(): void {
-    console.log(this.editLesson);
-    if (this.lessonForm.invalid) {
+  createLessonContentOnSubmission(lessonContentForm: FormGroup): void {
+    console.log(lessonContentForm.value);
+    if (lessonContentForm.invalid) {
       return;
     }
-    const clFormValue: CourseLesson = this.lessonForm.value;
-    const updatedLesson: CourseLesson = {
-      id: clFormValue.id,
-      title: clFormValue.title,
-      description: clFormValue.description
+    const ccFormValue: CourseContent = lessonContentForm.value;
+    const courContentValue: CourseContent = {
+      id: ccFormValue.id,
+      title: ccFormValue.title,
+      description: ccFormValue.description
     };
-    if (clFormValue.id) {
+    const lessonIndex = this.courseLessons.findIndex(value => value.id === this.editLessonId);
+    if (courContentValue.id) {
       console.log('API Update Lesson');
+      const lessonContentIndex = this.courseLessons[lessonIndex].content.findIndex(value => value.id === courContentValue.id);
+      this.courseLessons[lessonIndex].content[lessonContentIndex] = courContentValue;
     } else {
       console.log('API Create New Lesson');
     }
-    const updatedLessonIndex = this.courseLessons.findIndex(value => value.id === updatedLesson.id);
-    this.courseLessons[updatedLessonIndex] = updatedLesson;
-    this.lessonForm.reset();
+    this.resetEditContent();
   }
 
-  addNew(): void {
-    this.courseLessons.push({
-      id: this.courseLessons.length + 1 + '',
-      title: 'New Lesson',
-      description: 'Lorem Ipsum is standard dummy text ever.',
-      duration: 12
-    });
+  private resetEditContent(): void {
+    this.resetLessonForm = true;
+    this.editLessonId = null;
+    this.editCourseContent = null;
   }
 
-  drop(event: CdkDragDrop<string[]>): void {
-    moveItemInArray(this.courseLessons, event.previousIndex, event.currentIndex);
-  }
 }

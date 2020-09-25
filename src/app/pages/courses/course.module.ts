@@ -13,6 +13,9 @@ import {CourseBuilderComponent} from './course-builder/course-builder.component'
 import {BuildLessonsComponent} from './course-builder/build-lessons/build-lessons.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {AddEditLessonContentComponent} from './course-builder/build-lessons/lessons-builder/add-edit-lesson-content/add-edit-lesson-content.component';
+import { DraggableItemsComponent } from './course-builder/build-lessons/lessons-builder/draggable-items/draggable-items.component';
+import { DialogPromptComponent } from '../../@theme/components/dialog-prompt/dialog-prompt.component';
 
 @NgModule({
   imports: [
@@ -33,7 +36,10 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     CourseDetailComponent,
     CreateCourseComponent,
     CourseBuilderComponent,
-    BuildLessonsComponent
+    BuildLessonsComponent,
+    AddEditLessonContentComponent,
+    DraggableItemsComponent,
+    DialogPromptComponent
   ]
 })
 export class CourseModule {

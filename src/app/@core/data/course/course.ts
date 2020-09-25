@@ -12,6 +12,11 @@ export interface Course {
 export interface CourseLesson {
   id?: string;
   title: string;
+  content: CourseContent[];
+}
+export interface CourseContent {
+  id?: string;
+  title: string;
   description: string;
   duration?: number;
 }
